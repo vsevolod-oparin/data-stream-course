@@ -1,0 +1,41 @@
+\section{Подсчет различных элементов через хэширование} % (fold)
+\label{sec:eds_via_hashing}
+
+\paragraph{Задача} % (fold)
+\label{par:problem}
+
+\begin{itemize}
+	\item Ванильная модель. Дан поток $\sigma = (a_1, a_2, \cdots, a_m)$, все $a_i \in [n]$. Имеем частотный вектор $f$ в неявном виде. $||f||_1 = m$. 
+	\item Найти $d = |\{j | f_j > 0 \}|$. Ищем $(\epsilon, \delta)$-аппроксимацию.
+	\item По-другому, ищем нулевой момент $F_0 = ||f||_0$.
+\end{itemize}
+
+% paragraph problem (end)
+
+\paragraph{Алгоритм BJKST} % (fold)
+\label{par:bjkst}
+
+\begin{itemize}
+	\item Берем 2-универсальную $h : [m] \rightarrow [m]$ и $g : [m] \rightarrow [O(\frac{\log m}{\epsilon^2})]$.
+	\item $t = 0$, держим пустую хэш-таблицу $B$.
+	\item Процессим $j$. Если $h_t(j) = 0$, то добавляем в таблицу $g(j)$.
+	\item Если $|B| > \frac{c}{\epsilon^2}$, то $t$ увеличиваем, таблицу рехэшируем.
+	\item Результат $|B|2^t$.
+\end{itemize}
+
+% paragraph bjkst (end)
+
+\paragraph{Анализ} % (fold)
+\label{par:bjkst_analysis}
+
+\begin{itemize}
+	\item Анализ довольно техничен. Показываем, что при нужном $t$ алгоритм остановится с высокой вероятностью.
+	\item Обзываем обзываем событие фэйловым, если при каком-то $t$ вышли за границы приближения и это $t$ равно $t$-конечному. Делаем объединение по всем $t$ от $1$ до $\log m$.
+	\item Далее делии объединение на две части, при $t$ большем, чем $t^*$ делаем одну границу, при $t$ меньшем -- другую, получаем счастье.
+ 	\item Памяти $O(\log m + \frac{1}{\epsilon^2} \log \frac{1}{\epsilon} + \log \log m)$.
+
+\end{itemize}
+
+% paragraph bjkst_analysis (end)
+
+% section eds_via_hashing (end)

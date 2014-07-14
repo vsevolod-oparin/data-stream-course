@@ -1,0 +1,35 @@
+\section{Оценка частотных моментов} % (fold)
+\label{sec:frequent_moment}
+
+\paragraph{Задача} % (fold)
+\label{par:problem}
+
+\begin{itemize}
+	\item Ванильная модель. Дан поток $\sigma = (a_1, a_2, \cdots, a_m)$, все $a_i \in [n]$. Имеем частотный вектор $f$ в неявном виде. $||f||_1 = m$. 
+	\item Найти $F_k = \sum_i f_i^k$.
+	\item Строим $(\epsilon, \delta)$-аппроксимацию.
+\end{itemize}
+
+\paragraph{Алгоритм AMS} % (fold)
+\label{par:ams_algo}
+
+\begin{itemize}
+	\item Тыкаем случайный элемент. 
+	\item Начинаем считать, сколько раз он встретится в потоке. Пусть это будет r.
+	\item Возвращаем $m (r^k - (r - 1)^k)$.
+\end{itemize}
+
+% paragraph ams_algo (end)
+
+\paragraph{Анализ} % (fold)
+\label{par:analysis}
+
+\begin{itemize}
+	\item Сначала показываем, что мат. ожидание хорошее. В lecnotes сложновато написано, просто перебираем все элементы.
+	\item 
+	\item 
+\end{itemize}
+
+% paragraph analysis (end)
+
+% section frequent_moment (end)

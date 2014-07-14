@@ -1,0 +1,19 @@
+\section{Коммуникационная сложность} % (fold)
+\label{sec:communication_complexity}
+
+\paragraph{Задачи} % (fold)
+\label{par:problems}
+
+\begin{itemize}
+	\item Рассматриваем одностороннюю коммуникационную сложность. 
+	\item $D^{\rightarrow}$ -- детерминированная.
+	\item $R^{\rightarrow}$ -- вероятностная с односторонней ошибкой $\frac{1}{3}$.
+	\item $\text{EQUALITY}(x, y)$ -- равенство строк. $D \geq n$, $R = O(\log n)$.
+	\item $\text{INDEX}(x, j)$ -- взять $x_j$. $D \geq \Omega(n)$, $R = \Omega(n)$.
+	\item Сведение INDEX к MAJORITY. Делаем два потока. В один запихиваем $x$, в другой -- нужный индекс пополам раз. Счастье.
+	\item $p$-проходные алгоритмы можно рассматривать так. Делим поток на две части. Один -- у Алисы, другой -- у Боба. Алиса шлет Бобу $p$ сообщений по размеру памяти. Боб -- $p - 1$.
+\end{itemize}
+
+% paragraph problems (end)
+
+% section communication_complexity (end)

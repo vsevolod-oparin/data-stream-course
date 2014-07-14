@@ -1,0 +1,39 @@
+\section{Число различных элементов} % (fold)
+\label{sec:distinct_elements}
+
+\paragraph{Задача} % (fold)
+\label{par:problem}
+\begin{itemize}
+	\item Ванильная модель. Дан поток $\sigma = (a_1, a_2, \cdots, a_m)$, все $a_i \in [n]$. Имеем частотный вектор $f$ в неявном виде. $||f||_1 = m$. 
+	\item Найти $d = |\{j | f_j > 0 \}|$. Ищем $(\epsilon, \delta)$-аппроксимацию.
+	\item $\Omega( \min(m, n) )$ оценка на память при $\delta = 0$ или $\epsilon = 0$.	
+\end{itemize}
+% paragraph problem (end)
+
+\paragraph{Алгоритм Флажолета-Мартина} % (fold)
+\label{par:flajolet_martin}
+
+\begin{itemize}
+	\item Пусть есть целое $p > 0$. $\text{zeros}(p) = \max \{i | 2^i \text{ делит } p\}$.
+	\item Взять 2-универсальную хэш-функцию. Найти $\max \text{zeros}(h(j))$ в потоке. Вернуть $2^{z + 0.5}$.
+	\item Считаем, что один из токенов выбьет $\text{zeros}(h(j))$ больший $\log d$, но не сильно.	
+	\item Ошибка будет константной. Используя медиану уменьшаем ее до $\delta$. Памяти $O(\log(1 \slash \delta) \cdot \log n)$.
+\end{itemize}
+% paragraph flajolet_martin (end)
+
+\paragraph{Анализ} % (fold)
+\label{par:analysis}
+\begin{itemize}
+	\item Для каждого $j$ и $r$ заведем С.В. $X_{j, r} = [ \text(zeros)(j) \geq r ]$. $\Ex{X_{j, r}} = \frac{1}{2^r}$.
+	\item $Y_r = \sum_{j | f_j > 0} X_{j, r}$. $\Ex{Y_r} = \frac{d}{2^r}$. $\Var{Y_r} \leq \frac{d}{2^r}$.
+	\item $Y_r > 0 \Leftrightarrow t \geq r$.
+	\item $\Pr{Y_r > 0} \leq \frac{\Ex{Y_r}}{1} = \frac{d}{2^r}$.
+	\item $\Pr{Y_r = 0} = \Pr{|Y_r - \Ex{Y_r}| \geq \frac{d}{2^r}} \leq \frac{2^r}{d}$.
+	\item С двумя предыдущими пунктами подбираем нужное $r$ и радуемся жизни.
+\end{itemize}
+
+Печаль: $\epsilon$ фиксирован.
+
+% paragraph analysis (end)
+
+% section distinct_elements (end)

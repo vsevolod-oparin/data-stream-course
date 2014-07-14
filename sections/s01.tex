@@ -1,0 +1,33 @@
+\section{Основные понятия} % (fold)
+\label{sec:basics}
+
+\paragraph{Модель-ванилька} % (fold)
+\label{par:vanilla_model}
+\begin{itemize}
+	\item Поток $\sigma = \{a_1, a_2, \cdots, a_m \}$. Все $a_i \in [n]$. Токены -- элементы потока.
+	\item Памяти $s$. Хочется как минимум $o(\min(n, m))$, как грааль $O(\log n + \log m)$. Будет $O(polylog(n, m))$.
+	\item Проходов по потоку $p$. Хочется $p = 1$.
+\end{itemize}
+% paragraph vanilla_model (end)
+
+\paragraph{Что считаем} % (fold)
+\label{par:quality_function}
+\begin{itemize}
+	\item Считаем функцию $\phi(\sigma) \rightarrow \mathbf{R}$. Считать точно не получится. 
+	\item Пусть алгоритм отвечает $A(\sigma)$. $(\epsilon, \delta)$-аппроксимация, если $\Pr{\left|\frac{A(\sigma)}{\phi(\sigma)} - 1\right| > \epsilon} < \delta$.
+	\item $(\epsilon, \delta)$-аддитивная аппроксимация, если $\Pr{\left| A(\sigma) - \phi(\sigma) \right| > \epsilon} < \delta$.		
+\end{itemize}
+% paragraph quality_function (end)
+
+\paragraph{Модель-черепашка} % (fold)
+\label{par:turnstile_model}
+\begin{itemize}
+	\item Частотный вектор $f = (f_1, f_2, \cdots, f_n)$. Что сколько раз пришло.
+	\item Считаем $\Phi(f)$. Нам приходят инструкции по обновлению $f$. 
+	\item Модель-черепашка -- это когда нам приходит $(j, c) \in [n] \times [-L, L]$. Насколько обновить $f_j$. Обычно изначально $f = 0$.
+	\item Иногда считают, что $m$ работает как оценка сверху: $||f||_1 \leq m$.
+	\item Строгая черепашка -- когда $f \geq 0$. Кассовая модель -- когда все значения только увеличиваются.
+\end{itemize}
+% paragraph turnstile_model (end)
+
+% section basics (end)

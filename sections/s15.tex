@@ -1,0 +1,20 @@
+\section{Сведения} % (fold)
+\label{sec:reductions}
+
+\paragraph{Тезисы} % (fold)
+\label{par:thesises}
+
+\begin{itemize}
+	\item Рассматриваем двусторонний протокол. 
+	\item Свойство прямоугольника: если $trans(x_1, y_1) = trans(x_2, y_2) = \tau$, то 
+			$trans(x_1, y_2) = trans(x_2, y_1) = \tau$. 
+	\item $D(EQ) \geq n$. $trans(x_1, x_1) \neq trans(x_2, x_2)$. Строк $2^n$, потому протоколов тоже много.
+	\item Оценка для различных элементов на $p$ проходов. Суммарное число переданной информации $2ps$. 
+	Если эта штука $\geq n$, то $s \geq \Omega(\frac{n}{p})$.
+	\item Делаем два потока по принципу $a_i = x_i + 2 \cdot (i - 1)$. Если строки совпадают, то DISTINCT-ELEMENTS = $n$.
+	\item Еще взять какое-нибудь кодирование. Тогда даже различие с маленькой $\epsilon$-ошибкой будет трудным.
+\end{itemize}
+
+% paragraph thesises (end)
+
+% section reductions (end)

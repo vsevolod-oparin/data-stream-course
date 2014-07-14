@@ -1,0 +1,62 @@
+\section{Поиск частых элементов через эскиз} % (fold)
+\label{sec:freq_elements_via_sketching}
+
+\paragraph{Задача} % (fold)
+\label{par:problem}
+\begin{itemize}
+	\item Модель-черепашка. Поток $\sigma = (a_1, a_2, \cdots, a_m)$. $a_i \in [n] \times [-L, L]$. 
+	\item Частотный вектор $f = (f_1, f_2, \cdots, f_n)$. $f_i = \sum_{i: j_i = j} c_i$.
+	\item $|f_i| \leq m$.
+	\item Будем делать эскизы.
+\end{itemize}
+% paragraph problem (end)
+
+\paragraph{$(\epsilon, \delta)$-рассчетный мин. эксиз} % (fold)
+\label{par:cm-sketch}
+\begin{itemize}
+	\item Берем $t$ 2-универсальных хэш-функций. Заводим табличку $C$ размера $t \times k$.
+	\item $t = \log(1 \slash \delta)$; $k = 2 \slash \epsilon$.
+	\item Делаем все по нулям. Когда процессим $(j, c)$, $C[i][h_i(j)] += c$ для $\forall i$.
+	\item Ответ на запрос об $j$ -- $\min_i C[i][h_i(j)]$.
+\end{itemize}
+% paragraph cm-sketch (end)
+
+\paragraph{Анализ мин. эскиза} % (fold)
+\label{par:analysis_cms}
+\begin{itemize}
+	\item Переходим к кассовому аппарату: $c > 0$. Результаты эскиза всегда больше, чем на самом деле.
+	\item Оцениваем избыток для одной функции через мат. ожидание.
+	\item $X_a = \sum Y_{a,b}$. $Y_{a, b} = f_b \cdot [h(a) = h(b)]$. Последняя часть случается с $Pr = \frac{1}{k}$.
+	\item $\Ex{ X_a } = \frac{\epsilon}{2} \cdot (||f||_1 - f_a) \leq \frac{\epsilon}{2} ||f||_1$.
+	\item Привет, Марков: $\Pr{X_a \geq \epsilon ||f||_1} \leq \frac{1}{2}$.
+	\item Повторить $t$ раз на независимых функциях, получить вероятность $\frac{1}{2^t} = \delta$.
+	\item Памяти потребовалось $O(\log \frac{1}{\delta} (\frac{\log m}{\epsilon} + \log n))$.
+\end{itemize}
+% paragraph analysis_cms (end)
+
+\paragraph{Алгоритм расчетного эскиза} % (fold)
+\label{par:count_sketch}
+
+\begin{itemize}
+	\item Заводим таблицу счетчиков $t \times k$. $t = \log(1 \slash \delta)$, $k = 3 \slash \epsilon^2$.
+	\item Заводим $t$ 2-универсальных хэш. функций $f_i : [n] \rightarrow [k]$ и $g_i : [n] \rightarrow \{-1, 1\}$.
+	\item Когда процессим элемент $j$ в строке $i \in [1, t]$ инкрементим счетчик $C[i][h_i(j)] += g_i(j)$.	
+\end{itemize}
+
+\paragraph{Анализ} % (fold)
+\label{par:analysis_cs}
+
+% paragraph analysis_cs (end)
+\begin{itemize}
+	\item Б.о.о. фиксируем одну строку, там одна $h$ и одна $g$. Процессим элемент $x$, считаем количество фигни.
+	\item Фигня от элемента $j$ равна $Y_j$. С вероятностью $\frac{1}{2k}$ это либо $f_j$, либо $-f_j$.
+	\item $\Ex{Y_j} = 0$, $\Var{Y_j} = \frac{f_j^2}{k}$.
+	\item Всеобщая фигня составляет $X = \sum_{j \neq a} Y_j$. Значит, $\Var{X} = \frac{||f||_2 - f_a^2}{k}$.
+	\item Пусть $k = \sqrt{||f||_2 - f_a^2}$.
+	\item $\Pr{|X| > \epsilon \cdot K} \leq \frac{1}{\epsilon^2 \cdot k} \leq \frac{1}{3}$.
+	\item Потом Люк использует медиану, чтобы довести ошибку до $\delta$.
+	\item Потребовалось $O(\frac{1}{\epsilon^2} \cdot \log \frac{1}{\delta})$.
+\end{itemize}
+
+% paragraph count_sketch (end)
+% section freq_elements_via_sketching (end)

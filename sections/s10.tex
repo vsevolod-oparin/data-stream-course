@@ -1,0 +1,51 @@
+\section{Потоковые алгоритмы на графах} % (fold)
+\label{sec:graph_stream}
+
+\paragraph{Графовые потоки} % (fold)
+\label{par:graph_streams}
+
+\begin{itemize}
+	\item Незайтейлево получаем, что даже связность требует $\Omega(n)$ памяти.
+	\item Цель сделать $O(space \slash n)$ как можно меньше.
+	\item Поток имеет вид $\langle (u_1, v_1), \cdots, (u_m, v_m) \rangle$.
+	\item Здесь может потребоваться рассказать про link-cut деревья.
+\end{itemize}
+
+% paragraph graph_streams (end)
+
+\paragraph{Связность графа} % (fold)
+\label{par:connectedness}
+
+\begin{itemize}
+	\item Строим МСТ через СНМ.
+	\item Получаем счастье.
+\end{itemize}
+
+% paragraph connectedness (end)
+
+\paragraph{Двудольность} % (fold)
+\label{par:bipartite}
+
+\begin{itemize}
+	\item Строим МСТ через СНМ.
+	\item Запоминаем расстояние до корня. Проверяем не получится ли как-нибудь нечетного цикла.
+	\item * Монотонность: если граф однажды испортится, то дальше уже неважно, что будет.
+\end{itemize}
+
+% paragraph bipartite (end)
+
+\paragraph{Расстояние} % (fold)
+\label{par:distance}
+
+\begin{itemize}
+	\item Процессим ребро граф $G$. Если оно не лежит в цикле длины $< t$, то добавляем в граф.
+	\item Построили граф $H$. $dist_G(u, v) \leq dist_H(u, v) \leq t \cdot dist_G(u, v)$.
+	\item Пографы без циклов длины меньшей $t$ называются $t$-спаннерами.
+	\item Теорема Баллоба. В таких графах $O(n^{1 + \frac{2}{t}})$ ребер.
+	\item Можно убрать из графа все вершины со степенью меньшей $\frac{m}{n}$. Число оставшихся ребер будет хотя бы $n$.
+	\item Запускаем BFS. В нем будет $\frac{t - 1}{2}$ ветвлений со степень хотя бы $\frac{m}{n}$. Получается, вершин не меньше, чем $\left(\frac{m}{n}\right)^{\frac{t - 1}{2}}$. Отсюда выводим $m \leq n^{1 + \frac{2}{t - 1}}$.
+\end{itemize}
+
+% paragraph distance (end)
+
+% section graph_stream (end)

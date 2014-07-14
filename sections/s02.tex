@@ -1,0 +1,35 @@
+\section{Поиск частых элементов} % (fold)
+\label{sec:frequent_elements_problem}
+
+\paragraph{Задача} % (fold)
+\label{par:problem}
+\begin{itemize}
+	\item Ванильная модель. Дан поток $\sigma = (a_1, a_2, \cdots, a_m)$, все $a_i \in [n]$. Имеем частотный вектор $f$ в неявном виде. $||f||_1 = m$. 
+	\item MAJORITY. Если есть такое $j$, что $f_j \geq \frac{m}{2}$, то вывести $j$, иначе $\perp$.
+	\item FREQUENT с параметром $k$. Вернуть множество $\{j\,|\,f_j \geq \frac{m}{k} \}$.
+	\item Однопроходный MAJORITY требует $\Omega(\min(m, n))$ памяти.
+	\item FREQUENCY-ESTIMATION. В один проход построить по потоку $\sigma$ структуру данных, которая умеет оценивать $f_a$ для заданного $a \in [n]$. Запросы подаются после прохода. 
+\end{itemize}
+% paragraph problem (end)
+
+\paragraph{Misra-Gries} % (fold)
+\label{par:misra_gries}
+
+\begin{itemize}
+	\item Алгоритм Misra-Gries состоит из трех фаз. Препроцессинг, обработка потока, ответы на запросы.
+	\item Храним счетчики токенов в мапе $A$. Храним $\leq k - 1$.
+	\item Обработка токена $j$. Если $j$ в ключах, увеличить счетчик. Если нет, но мапа маленькая, добавить в мапу $(j, 1)$. Иначе, вычесть из всех счетчиков по единице. (Обобщение обычной MAJORITY).	
+\end{itemize}
+
+% paragraph misra_gries (end)
+
+\paragraph{Анализ} % (fold)
+\label{par:analysis}
+\begin{itemize}
+	\item Памяти $O(k(\log n + \log m))$.
+	\item Работает хорошо. Рисуем график как в MAJORITY. +1 делаем хотя бы $\frac{m}{k}$ раз, -1 делаем не более $\frac{m}{k}$ раз. Все радуются.
+\end{itemize}
+
+% paragraph analysis (end)
+
+% section frequent_elements_problem (end)

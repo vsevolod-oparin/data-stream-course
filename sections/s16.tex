@@ -1,0 +1,65 @@
+\section{Непересекаемость множеств и нижние оценки} % (fold)
+\label{sec:sd_lb}
+
+\paragraph{CC для DISJ} % (fold)
+\label{par:cc_disj}
+
+\begin{itemize}
+	\item Сведение INDEX к DISJ. 
+	\item Одно множество это позиции единичек в $x$, другое, одноэлементное, состоит из одной запрашиваемой позиции.
+	\item Счастье.
+\end{itemize}
+
+% paragraph cc_disj (end)
+
+\paragraph{Связность графа} % (fold)
+\label{par:st_connectivity}
+
+\begin{itemize}
+	\item Сведим DISJ к связности.
+	\item Заводим $n + 2$ веришины: $n$ для множества + $s$ + $t$. 
+	\item $s$ соединяем с тем, что есть у Алисы; $t$ с тем, что у Боба.
+	\item Связность $\Leftrightarrow$ пересекаемость.
+\end{itemize}
+
+% paragraph st_connectivity (end)
+
+\paragraph{Совершенное паросочетание} % (fold)
+\label{par:perfect_matching}
+
+\begin{itemize}
+	\item Сводим INDEX к паросочетанию.
+	\item Делаем граф с $V = \cup_i \{a_i, b_i, u_i, v_i\}$.
+	\item $E_A = \{ (u_i, v_j) \,|\, x_{f(i, j)} = 1 \}$.
+	\item $E_B = \{(a_l, u_l) \,|\,l \neq i\} \cup \{(b_l, v_l \,|\, l \neq j) \} \cup \{(a_i, b_j)\,|\,f(i, j) = k\}$.
+	\item Счастье.
+\end{itemize}
+
+% paragraph perfect_matching (end)
+
+\paragraph{Норма $F_k$ и мультиплеерный DISJ} % (fold)
+\label{par:f_k_disj}
+
+\begin{itemize}
+	\item Теорема $R(DISJ_{n, t}) \geq \Omega(n \slash t)$.
+	\item Однопроходный алгоритм для $F_k$ требует $\Omega(m^{1 - 2 \slash k})$.
+	\item Берем набор $t$ векторов $x_1, \cdots, x_t$. Если составить матрицу вида
+	$$
+	\left(
+	\begin{array}{c}
+		x_1 \\
+		x_2 \\
+		\cdots \\
+		x_t \\
+	\end{array}
+	\right)
+	$$
+	\item В каждой колонке может быть $0$, $1$ или $t$ единичек. $t$ единичек только в одной колонке.
+	\item Если DISJ = 0, то $F_k \leq n$, иначе $F_k \geq t^k$. Если взять $t$ такое, что $t^k \geq 2 \cdot m$,
+	то 2-аппроксимация умеет различать эти два случая.
+	\item Памяти используется $\Omega(m \slash t^2) = \Omega(m^{1 - 2 \slash k})$.
+\end{itemize}
+
+% paragraph f_k_disj (end)
+
+% section sd_lb (end)
